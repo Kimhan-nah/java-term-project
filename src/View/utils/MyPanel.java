@@ -1,4 +1,4 @@
-package View;
+package View.utils;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -9,7 +9,7 @@ import javax.swing.JToolBar;
 public class MyPanel extends JPanel {
   private JButton backButton;
 
-  MyPanel() {
+  public MyPanel() {
     JToolBar toolBar = new JToolBar();
     backButton = new JButton("Go Back");
     add(toolBar);

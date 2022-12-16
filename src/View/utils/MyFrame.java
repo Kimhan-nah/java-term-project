@@ -1,10 +1,10 @@
-package View;
+package View.utils;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 public class MyFrame extends JFrame {
-  MyFrame(String title) {
+  public MyFrame(String title) {
     super(title);
     int FRAME_WIDTH = 1200;
     int FRAME_HEIGHT = 700;

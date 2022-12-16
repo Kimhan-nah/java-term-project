@@ -1,5 +1,6 @@
-package View;
+package View.panels;
 
+import View.utils.MyPanel;
 import java.awt.*;
 import javax.swing.*;
 
@@ -7,7 +8,7 @@ public class DepositPanel extends MyPanel {
   private JTextField depositAmountField;
   private JButton submitButton;
 
-  DepositPanel() {
+  public DepositPanel() {
     JLabel depositAmountLabel = new JLabel("입금할 금액 : ");
     depositAmountField = new JTextField(25);
     submitButton = new JButton("Add User");

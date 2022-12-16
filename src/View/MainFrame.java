@@ -1,61 +1,9 @@
 package View;
 
-import javax.swing.*;
+import View.panels.*;
+import View.utils.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-class myButton extends JButton {
-  private Font font;
-  public myButton(String text) {
-    super(text);
-    font = new Font("Impact Roman", Font.BOLD, 30);
-    setFont(font);
-  }
-}
-
-class MainPanel extends JPanel {
-  private myButton depositButton;
-  private myButton withdrawButton;
-  private myButton transferButton;
-  private myButton balanceInquiryButton;
-  private myButton detailsButton;
-  private myButton quitButton;
-
-  public MainPanel() {
-    setLayout(new GridLayout(2, 3));
-
-    depositButton = new myButton("Deposit");
-    withdrawButton = new myButton("Withdraw");
-    transferButton = new myButton("Transfer");
-    balanceInquiryButton = new myButton("Balance Inquiry");
-    detailsButton = new myButton("Details");
-    quitButton = new myButton("Quit");
-
-    add(depositButton);
-    add(withdrawButton);
-    add(transferButton);
-    add(balanceInquiryButton);
-    add(detailsButton);
-    add(quitButton);
-  }
-  public void viewDeposit(ActionListener actionListener) {
-    depositButton.addActionListener(actionListener);
-  }
-  public void viewWithdraw(ActionListener actionListener) {
-    withdrawButton.addActionListener(actionListener);
-  }
-  public void viewTransfer(ActionListener actionListener) {
-    transferButton.addActionListener(actionListener);
-  }
-  public void viewBalance(ActionListener actionListener) {
-    balanceInquiryButton.addActionListener(actionListener);
-  }
-  public void viewDetails(ActionListener actionListener) {
-    balanceInquiryButton.addActionListener(actionListener);
-  }
-}
-//public class MainFrame extends JFrame {
 public class MainFrame extends MyFrame {
   private CardLayout cardLayout;
   public MainFrame(String title) {
