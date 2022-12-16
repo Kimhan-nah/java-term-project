@@ -14,6 +14,5 @@ public class MyFrame extends JFrame {
     setLayout(new BorderLayout());
     setBounds(FRAME_X, FRAME_Y, FRAME_WIDTH, FRAME_HEIGHT);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//    setVisible(true);
   }
 }

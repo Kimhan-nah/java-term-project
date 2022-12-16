@@ -11,8 +11,6 @@ class myButton extends JButton {
     super(text);
     font = new Font("Impact Roman", Font.BOLD, 30);
     setFont(font);
-//    setText("Morph");
-//    addActionListener(new myListener());
   }
 }
 
@@ -34,14 +32,6 @@ class MainPanel extends JPanel {
     detailsButton = new myButton("Details");
     quitButton = new myButton("Quit");
 
-    depositButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        new DepositFrame();
-        setVisible(false);
-      }
-    });
-
     add(depositButton);
     add(withdrawButton);
     add(transferButton);
@@ -49,26 +39,58 @@ class MainPanel extends JPanel {
     add(detailsButton);
     add(quitButton);
   }
-
+  public void viewDeposit(ActionListener actionListener) {
+    depositButton.addActionListener(actionListener);
+  }
+  public void viewWithdraw(ActionListener actionListener) {
+    withdrawButton.addActionListener(actionListener);
+  }
+  public void viewTransfer(ActionListener actionListener) {
+    transferButton.addActionListener(actionListener);
+  }
+  public void viewBalance(ActionListener actionListener) {
+    balanceInquiryButton.addActionListener(actionListener);
+  }
+  public void viewDetails(ActionListener actionListener) {
+    balanceInquiryButton.addActionListener(actionListener);
+  }
 }
 //public class MainFrame extends JFrame {
 public class MainFrame extends MyFrame {
+  private CardLayout cardLayout;
   public MainFrame(String title) {
     super(title);
-    MainPanel main_panel = new MainPanel();   // init panel (main panel)
-    // set layout
-//    setLayout(new BorderLayout());
+    cardLayout = new CardLayout();
+    MainPanel mainPanel = new MainPanel();   // init panel (main panel)
+    DepositPanel depositPanel = new DepositPanel();
+    WithdrawPanel withdrawPanel = new WithdrawPanel();
+    TransferPanel transferPanel = new TransferPanel();
+    BalanceInquiryPanel balanceInquiryPanel = new BalanceInquiryPanel();
+    DetailsPanel detailsPanel = new DetailsPanel();
 
-    add("Center", main_panel);
-    // frame width & height
-//    int FRAME_WIDTH = 1200;
-//    int FRAME_HEIGHT = 700;
-//    int FRAME_X = 100;
-//    int FRAME_Y = 100;
+    setLayout(cardLayout);
 
-    // size of our application frame
-//    setBounds(FRAME_X, FRAME_Y, FRAME_WIDTH, FRAME_HEIGHT);
-//    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    // adds view to card layout with unique constraints
+    add(mainPanel, "main");
+    add(depositPanel, "deposit");
+    add(withdrawPanel, "withdraw");
+    add(transferPanel, "transfer");
+    add(balanceInquiryPanel, "inquiry");
+    add(detailsPanel, "details");
+
+    // switch view according to its constraints on click
+    mainPanel.viewDeposit(e -> cardLayout.show(MainFrame.this.getContentPane(), "deposit"));
+    mainPanel.viewTransfer(e -> cardLayout.show(MainFrame.this.getContentPane(), "transfer"));
+    mainPanel.viewWithdraw(e -> cardLayout.show(MainFrame.this.getContentPane(), "withdraw"));
+    mainPanel.viewBalance(e -> cardLayout.show(MainFrame.this.getContentPane(), "inquiry"));
+    mainPanel.viewDetails(e -> cardLayout.show(MainFrame.this.getContentPane(), "details"));
+
+    depositPanel.backButton(e -> cardLayout.show(MainFrame.this.getContentPane(), "main"));
+    withdrawPanel.backButton(e -> cardLayout.show(MainFrame.this.getContentPane(), "main"));
+    transferPanel.backButton(e -> cardLayout.show(MainFrame.this.getContentPane(), "main"));
+    balanceInquiryPanel.backButton(e -> cardLayout.show(MainFrame.this.getContentPane(), "main"));
+    detailsPanel.backButton(e -> cardLayout.show(MainFrame.this.getContentPane(), "main"));
+
     setVisible(true);
   }
 }
