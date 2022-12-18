@@ -1,13 +1,15 @@
 package View;
 
 import View.panels.*;
-import View.utils.*;
 import java.awt.*;
+import javax.swing.JFrame;
 
-public class MainFrame extends MyFrame {
+public class MainFrame extends JFrame {
+//  public class MainFrame extends MyFrame {
   private CardLayout cardLayout;
   public MainFrame(String title) {
     super(title);
+
     cardLayout = new CardLayout();
     MainPanel mainPanel = new MainPanel();   // init panel (main panel)
     DepositPanel depositPanel = new DepositPanel();
@@ -39,6 +41,8 @@ public class MainFrame extends MyFrame {
     balanceInquiryPanel.backButton(e -> cardLayout.show(MainFrame.this.getContentPane(), "main"));
     detailsPanel.backButton(e -> cardLayout.show(MainFrame.this.getContentPane(), "main"));
 
+    setBounds(300, 300, 500, 400);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
   }
 }

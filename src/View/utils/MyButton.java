@@ -7,7 +7,7 @@ public class MyButton extends JButton {
   private Font font;
   public MyButton(String text) {
     super(text);
-    font = new Font("Impact Roman", Font.BOLD, 30);
+    font = new Font("Impact Roman", Font.BOLD, 15);
     setFont(font);
   }
 }

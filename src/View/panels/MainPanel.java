@@ -43,6 +43,6 @@ public class MainPanel extends JPanel {
     balanceInquiryButton.addActionListener(actionListener);
   }
   public void viewDetails(ActionListener actionListener) {
-    balanceInquiryButton.addActionListener(actionListener);
+    detailsButton.addActionListener(actionListener);
   }
 }

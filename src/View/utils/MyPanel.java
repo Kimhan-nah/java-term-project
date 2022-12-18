@@ -1,10 +1,8 @@
 package View.utils;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JToolBar;
+import javax.swing.*;
 
 public class MyPanel extends JPanel {
   private JButton backButton;
@@ -12,7 +10,9 @@ public class MyPanel extends JPanel {
   public MyPanel() {
     JToolBar toolBar = new JToolBar();
     backButton = new JButton("Go Back");
-    add(toolBar);
+
+    setLayout(new BorderLayout());
+    add("North", toolBar);
     toolBar.add(backButton);
     toolBar.setMaximumSize(new Dimension(Integer.MAX_VALUE, toolBar.getMinimumSize().height));
   }
