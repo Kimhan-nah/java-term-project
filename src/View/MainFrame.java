@@ -2,21 +2,26 @@ package View;
 
 import View.panels.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import Controller.AccountController;
 
 public class MainFrame extends JFrame {
 //  public class MainFrame extends MyFrame {
   private CardLayout cardLayout;
-  public MainFrame(String title) {
+  private AccountController controller;
+  public MainFrame(String title, AccountController controller) {
     super(title);
 
     cardLayout = new CardLayout();
+    this.controller = controller;
     MainPanel mainPanel = new MainPanel();   // init panel (main panel)
-    DepositPanel depositPanel = new DepositPanel();
-    WithdrawPanel withdrawPanel = new WithdrawPanel();
-    TransferPanel transferPanel = new TransferPanel();
-    BalanceInquiryPanel balanceInquiryPanel = new BalanceInquiryPanel();
-    DetailsPanel detailsPanel = new DetailsPanel();
+    DepositPanel depositPanel = new DepositPanel(controller);
+    WithdrawPanel withdrawPanel = new WithdrawPanel(controller);
+    TransferPanel transferPanel = new TransferPanel(controller);
+    BalanceInquiryPanel balanceInquiryPanel = new BalanceInquiryPanel(controller);
+    DetailsPanel detailsPanel = new DetailsPanel(controller);
 
     setLayout(cardLayout);
 
@@ -34,6 +39,12 @@ public class MainFrame extends JFrame {
     mainPanel.viewWithdraw(e -> cardLayout.show(MainFrame.this.getContentPane(), "withdraw"));
     mainPanel.viewBalance(e -> cardLayout.show(MainFrame.this.getContentPane(), "inquiry"));
     mainPanel.viewDetails(e -> cardLayout.show(MainFrame.this.getContentPane(), "details"));
+    mainPanel.quit(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.exit(0);
+      }
+    });
 
     depositPanel.backButton(e -> cardLayout.show(MainFrame.this.getContentPane(), "main"));
     withdrawPanel.backButton(e -> cardLayout.show(MainFrame.this.getContentPane(), "main"));

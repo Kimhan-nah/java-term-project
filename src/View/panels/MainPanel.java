@@ -29,6 +29,8 @@ public class MainPanel extends JPanel {
     add(balanceInquiryButton);
     add(detailsButton);
     add(quitButton);
+
+//    quitButton.addActionListener();
   }
   public void viewDeposit(ActionListener actionListener) {
     depositButton.addActionListener(actionListener);
@@ -44,5 +46,9 @@ public class MainPanel extends JPanel {
   }
   public void viewDetails(ActionListener actionListener) {
     detailsButton.addActionListener(actionListener);
+  }
+  public void quit(ActionListener actionListener) {
+//    quitButton.addActionListener();
+    quitButton.addActionListener(actionListener);
   }
 }

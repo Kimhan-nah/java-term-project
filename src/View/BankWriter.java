@@ -20,7 +20,6 @@ public class BankWriter
 
   public void setTransaction(String message, int amount)
   {
-//    last_transaction = message + " " + unconvert(amount);
     last_transaction = message + " " + amount + " won";
     System.out.println("transaction: " + last_transaction);
   }
@@ -29,6 +28,17 @@ public class BankWriter
   {
     last_transaction = message;
     System.out.println("transaction: " + last_transaction);
+  }
+
+  public void showBalance() {
+    System.out.println("Balance : " + bank.getBalance());
+  }
+
+  public void showLastTransaction() {
+    if (last_transaction.equals(""))
+      System.out.println("No Transaction");
+    else
+      System.out.println("last transaction : " + last_transaction);
   }
 
 
