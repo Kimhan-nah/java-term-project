@@ -4,7 +4,7 @@ import View.utils.*;
 import Controller.AccountController;
 import java.awt.event.*;
 
-public class DetailsPanel extends inquiryPanel implements ActionListener{
+public class DetailsPanel extends InquiryPanel implements ActionListener{
   private MyButton showButton;
   public DetailsPanel(AccountController controller) {
     super(controller);

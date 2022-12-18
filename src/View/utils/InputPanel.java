@@ -4,12 +4,12 @@ import java.awt.*;
 import javax.swing.*;
 import Controller.AccountController;
 
-public class inputPanel extends MyPanel {
+public class InputPanel extends MyPanel {
   private JLabel label;
   private JTextField inputField;
   private MyButton submitButton;
 
-  public inputPanel(AccountController controller) {
+  public InputPanel(AccountController controller) {
     super(controller);
     JPanel jpanel = new JPanel(new GridLayout(3, 0));
     JPanel buttonPanel = new JPanel(new GridLayout(3, 3));

@@ -3,6 +3,7 @@ package Controller;
 import View.BankWriter;
 import Model.BankAccount;
 import View.MainFrame;
+import javax.swing.JOptionPane;
 
 
 public class AccountController
@@ -46,15 +47,25 @@ public class AccountController
         case 'D':
         {
           int amount = Integer.parseInt(amountData);
-          if (active_account.deposit(amount)) active_writer.setTransaction("deposit $", amount);
-          else active_writer.setTransaction("deposit error ", amount);
+          if (active_account.deposit(amount)) {
+            active_writer.setTransaction("deposit $", amount);
+          }
+          else {
+            active_writer.setTransaction("deposit error ", amount);
+            throw new RuntimeException();
+          }
           break;
         }
         case 'W':
         {
           int amount = Integer.parseInt(amountData);
-          if (active_account.withdraw(amount)) active_writer.setTransaction("withdraw $", amount);
-          else active_writer.setTransaction("withdraw error ", amount);
+          if (active_account.withdraw(amount)) {
+            active_writer.setTransaction("withdraw $", amount);
+          }
+          else {
+            active_writer.setTransaction("withdraw error ", amount);
+            throw new RuntimeException();
+          }
           break;
         }
         case 'T':
@@ -69,6 +80,7 @@ public class AccountController
           }
           else  {
             active_writer.setTransaction("transfer error ");
+            throw new RuntimeException();
           }
           break;
         }
@@ -80,9 +92,10 @@ public class AccountController
 
           if (active_account.deposit(amount))
             active_writer.setTransaction("interest $", amount);
-          else
+          else {
             active_writer.setTransaction("interest error");
-
+            throw new RuntimeException();
+          }
           break;
         }
         case 'B':
@@ -101,6 +114,7 @@ public class AccountController
     }
     catch (RuntimeException e) {
       System.out.println("Invalid Command");
+      throw e;
     }
 
     // 모든 계좌의 정보를 출력합니다.

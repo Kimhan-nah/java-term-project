@@ -3,9 +3,9 @@ package View.panels;
 import View.utils.*;
 import Controller.AccountController;
 import java.awt.event.*;
-import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
-public class BalanceInquiryPanel extends inquiryPanel implements ActionListener{
+public class BalanceInquiryPanel extends InquiryPanel implements ActionListener{
   private MyButton showButton;
   public BalanceInquiryPanel(AccountController controller) {
     super(controller);

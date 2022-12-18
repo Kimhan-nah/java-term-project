@@ -16,12 +16,12 @@ public class MainPanel extends JPanel {
   public MainPanel() {
     setLayout(new GridLayout(2, 3));
 
-    depositButton = new MyButton("Deposit");
-    withdrawButton = new MyButton("Withdraw");
-    transferButton = new MyButton("Transfer");
-    balanceInquiryButton = new MyButton("Balance Inquiry");
-    detailsButton = new MyButton("Details");
-    quitButton = new MyButton("Quit");
+    depositButton = new MyButton("입금");
+    withdrawButton = new MyButton("출금");
+    transferButton = new MyButton("이체");
+    balanceInquiryButton = new MyButton("잔금 조회");
+    detailsButton = new MyButton("최근 거래 내역 조회");
+    quitButton = new MyButton("종료");
 
     add(depositButton);
     add(withdrawButton);

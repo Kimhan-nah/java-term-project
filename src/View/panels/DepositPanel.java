@@ -2,10 +2,11 @@ package View.panels;
 
 import View.utils.*;
 import java.awt.event.*;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import Controller.AccountController;
 
-public class DepositPanel extends inputPanel implements ActionListener {
+public class DepositPanel extends InputPanel implements ActionListener {
   private MyButton submitButton;
   private JTextField inputField;
   private String amountData;
@@ -22,10 +23,16 @@ public class DepositPanel extends inputPanel implements ActionListener {
   }
   public void actionPerformed(ActionEvent actionEvent)
   {
-    if (actionEvent.getSource() == submitButton) {
-      amountData = inputField.getText();
-      System.out.println(amountData);
-      getController().processTransactions('D', amountData);
+    try {
+      if (actionEvent.getSource() == submitButton) {
+        amountData = inputField.getText();
+        System.out.println(amountData);
+        getController().processTransactions('D', amountData);
+        JOptionPane.showMessageDialog(null, "Complete to Deposit", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+      }
+    }
+    catch (RuntimeException e) {
+      JOptionPane.showMessageDialog(null, "Deposit Error", "ERROR", JOptionPane.ERROR_MESSAGE);
     }
   }
 }
