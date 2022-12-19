@@ -15,12 +15,13 @@ public class BankWriter
 
   // TEST CODE
   public String unconvert(int i) {
-    return new DecimalFormat("0.00").format(i/100.0);
+    return new Integer(i).toString();
+//    return new DecimalFormat("0.00").format(i/100.0);
   }
 
   public void setTransaction(String message, int amount)
   {
-    last_transaction = message + " " + amount + " won";
+    last_transaction = message + " " + amount + "원";
     System.out.println("transaction: " + last_transaction);
   }
 
@@ -29,7 +30,6 @@ public class BankWriter
     last_transaction = message;
     System.out.println("transaction: " + last_transaction);
   }
-
   public void showBalance() {
     System.out.println("Balance : " + bank.getBalance());
   }
@@ -41,5 +41,8 @@ public class BankWriter
       System.out.println("last transaction : " + last_transaction);
   }
 
+  public String getLastTransaction() {
+    return last_transaction;
+  }
 
 }

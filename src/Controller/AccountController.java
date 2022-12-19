@@ -2,16 +2,13 @@ package Controller;
 
 import View.BankWriter;
 import Model.BankAccount;
-import View.MainFrame;
-import javax.swing.JOptionPane;
 
 
 public class AccountController
 {
-  private BankReader reader; // input view
   private BankAccount primary_account, secondary_account, active_account;
   private BankWriter primary_writer, secondary_writer, active_writer;
-  private MainFrame my_frame;
+  private BankReader reader; // input view
 
   public AccountController (BankReader r, BankAccount a1,BankWriter w1, BankAccount a2, BankWriter w2)
   {
@@ -22,7 +19,6 @@ public class AccountController
     secondary_writer = w2;
     active_account = primary_account;
     active_writer = primary_writer;
-//    my_frame = f;
   }
 
   public void resetAccount (BankAccount new_account,BankWriter new_writer) {
@@ -30,8 +26,10 @@ public class AccountController
     active_writer = new_writer;
   }
 
-  public void processTransactions(char command, String amountData)
+  public String processTransactions(char command, String amountData)
   {
+    String data = null;
+
     try {
 //      System.out.println("command : " + command);
       switch (command) {
@@ -43,15 +41,15 @@ public class AccountController
           break;
         case 'Q':
           System.out.println("Quit");
-          return;
+          return null;
         case 'D':
         {
           int amount = Integer.parseInt(amountData);
           if (active_account.deposit(amount)) {
-            active_writer.setTransaction("deposit $", amount);
+            active_writer.setTransaction("[예금] ", amount);
           }
           else {
-            active_writer.setTransaction("deposit error ", amount);
+            System.out.println("deposit error : " + amount);
             throw new RuntimeException();
           }
           break;
@@ -60,10 +58,11 @@ public class AccountController
         {
           int amount = Integer.parseInt(amountData);
           if (active_account.withdraw(amount)) {
-            active_writer.setTransaction("withdraw $", amount);
+            active_writer.setTransaction("[출금] ", amount);
           }
           else {
-            active_writer.setTransaction("withdraw error ", amount);
+//            active_writer.setTransaction("withdraw error ", amount);
+            System.out.println("withdraw error : " + amount);
             throw new RuntimeException();
           }
           break;
@@ -76,24 +75,11 @@ public class AccountController
               secondary_account.deposit(amount);
             else
               primary_account.deposit(amount);
-            active_writer.setTransaction("transfer $", amount);
+            active_writer.setTransaction("[이체] ", amount);
           }
           else  {
-            active_writer.setTransaction("transfer error ");
-            throw new RuntimeException();
-          }
-          break;
-        }
-        case 'I':
-          // 'I 이율', 활성 계좌의 금액을 이율만큼 증가
-        {
-          int amount = Integer.parseInt(amountData);
-          amount = active_account.getBalance() * reader.readAmount() / 100;
-
-          if (active_account.deposit(amount))
-            active_writer.setTransaction("interest $", amount);
-          else {
-            active_writer.setTransaction("interest error");
+//            active_writer.setTransaction("transfer error ");
+            System.out.println("transfer error : " + amount);
             throw new RuntimeException();
           }
           break;
@@ -101,15 +87,19 @@ public class AccountController
         case 'B':
         {
           active_writer.showBalance();
+          data = Integer.toString(active_account.getBalance());
           break ;
         }
         case 'L':
         {
           active_writer.showLastTransaction();
+          data = active_writer.getLastTransaction();
+          if (data.isEmpty())
+            data = "아직 거래 내역이 없습니다.";
           break ;
         }
-        default:
-          active_writer.setTransaction("Invalid Command: " + command);
+//        default:
+//          active_writer.setTransaction("Invalid Command: " + command);
       }
     }
     catch (RuntimeException e) {
@@ -118,7 +108,7 @@ public class AccountController
     }
 
     // 모든 계좌의 정보를 출력합니다.
-    // TEST CODE
+    // DEBUG CODE
     System.out.println("=======================");
     System.out.println("== currently active : " + ((active_account == primary_account) ? "primary" : "secondary"));
     System.out.println("== primary account : " + primary_writer.unconvert(primary_account.getBalance()));
@@ -126,6 +116,7 @@ public class AccountController
     System.out.println("=======================");
 
 //    this.processTransactions();
+    return data;
   }
 }
 

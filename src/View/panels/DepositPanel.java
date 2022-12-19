@@ -5,7 +5,6 @@ import java.awt.event.*;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import Controller.AccountController;
-
 public class DepositPanel extends InputPanel implements ActionListener {
   private MyButton submitButton;
   private JTextField inputField;
